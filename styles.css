@@ -1,0 +1,1015 @@
+:root {
+  --bg-top: #f6efe3;
+  --bg-bottom: #d7eced;
+  --ambient-1: rgba(244, 158, 76, 0.24);
+  --ambient-2: rgba(15, 143, 116, 0.18);
+  --card: rgba(255, 255, 255, 0.82);
+  --card-border: rgba(255, 255, 255, 0.6);
+  --card-shadow: rgba(20, 50, 58, 0.11);
+  --text: #14323a;
+  --muted: #4a6269;
+  --accent: #0f8f74;
+  --accent-dark: #096452;
+  --ring: rgba(15, 143, 116, 0.22);
+  --highlight: #f49e4c;
+  --countdown-bg-1: rgba(15, 143, 116, 0.08);
+  --countdown-bg-2: rgba(244, 158, 76, 0.1);
+  --toggle-bg: rgba(255, 255, 255, 0.72);
+  --toggle-bg-hover: rgba(255, 255, 255, 0.9);
+  --toggle-text: #0f6f5b;
+  --toggle-border: rgba(15, 143, 116, 0.35);
+  --celestial: #f6b945;
+  --celestial-glow: rgba(246, 185, 69, 0.35);
+  --star-opacity: 0;
+  --cloud-opacity: 0.8;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  padding:
+    max(0.5rem, env(safe-area-inset-top))
+    max(0.55rem, env(safe-area-inset-right))
+    max(0.75rem, env(safe-area-inset-bottom))
+    max(0.55rem, env(safe-area-inset-left));
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(circle at 14% 18%, var(--ambient-1), transparent 30%),
+    radial-gradient(circle at 84% 10%, var(--ambient-2), transparent 35%),
+    linear-gradient(160deg, var(--bg-top), var(--bg-bottom));
+  transition: background 550ms ease;
+}
+
+body[data-theme="dark"] {
+  --card: rgba(15, 24, 36, 0.82);
+  --card-border: rgba(183, 207, 232, 0.22);
+  --card-shadow: rgba(2, 12, 22, 0.52);
+  --text: #ebf4ff;
+  --muted: #bbcadb;
+  --accent: #7adac6;
+  --accent-dark: #6dd9c1;
+  --ring: rgba(122, 218, 198, 0.35);
+  --countdown-bg-1: rgba(122, 218, 198, 0.12);
+  --countdown-bg-2: rgba(70, 114, 194, 0.14);
+  --toggle-bg: rgba(9, 18, 30, 0.75);
+  --toggle-bg-hover: rgba(12, 24, 38, 0.88);
+  --toggle-text: #d8f9f1;
+  --toggle-border: rgba(122, 218, 198, 0.38);
+}
+
+body[data-theme="dracula"] {
+  --card: rgba(53, 45, 76, 0.84);
+  --card-border: rgba(189, 147, 249, 0.4);
+  --card-shadow: rgba(24, 17, 37, 0.62);
+  --text: #f8f8f2;
+  --muted: #d0c9e8;
+  --accent: #50fa7b;
+  --accent-dark: #8be9fd;
+  --ring: rgba(139, 233, 253, 0.34);
+  --highlight: #ffb86c;
+  --countdown-bg-1: rgba(80, 250, 123, 0.12);
+  --countdown-bg-2: rgba(189, 147, 249, 0.16);
+  --toggle-bg: rgba(63, 54, 90, 0.86);
+  --toggle-bg-hover: rgba(73, 62, 103, 0.92);
+  --toggle-text: #f8f8f2;
+  --toggle-border: rgba(189, 147, 249, 0.45);
+}
+
+body.phase-fajr {
+  --bg-top: #203d78;
+  --bg-bottom: #f7a76a;
+  --ambient-1: rgba(119, 166, 255, 0.29);
+  --ambient-2: rgba(255, 183, 123, 0.23);
+  --celestial: #ffd78a;
+  --celestial-glow: rgba(255, 215, 138, 0.42);
+  --star-opacity: 0.42;
+  --cloud-opacity: 0.6;
+}
+
+body.phase-sunrise {
+  --bg-top: #6cb9ff;
+  --bg-bottom: #ffd593;
+  --ambient-1: rgba(255, 198, 122, 0.25);
+  --ambient-2: rgba(120, 211, 255, 0.2);
+  --celestial: #ffc975;
+  --celestial-glow: rgba(255, 201, 117, 0.42);
+  --star-opacity: 0.1;
+  --cloud-opacity: 0.74;
+}
+
+body.phase-dhuhr {
+  --bg-top: #59c9ff;
+  --bg-bottom: #fff0a4;
+  --ambient-1: rgba(255, 228, 132, 0.22);
+  --ambient-2: rgba(113, 218, 255, 0.2);
+  --celestial: #ffe66f;
+  --celestial-glow: rgba(255, 230, 111, 0.44);
+  --star-opacity: 0;
+  --cloud-opacity: 0.84;
+}
+
+body.phase-asr {
+  --bg-top: #80b7e4;
+  --bg-bottom: #ffc48b;
+  --ambient-1: rgba(255, 188, 116, 0.25);
+  --ambient-2: rgba(130, 198, 255, 0.2);
+  --celestial: #ffc46c;
+  --celestial-glow: rgba(255, 196, 108, 0.4);
+  --star-opacity: 0;
+  --cloud-opacity: 0.66;
+}
+
+body.phase-maghrib {
+  --bg-top: #72468c;
+  --bg-bottom: #ff8a59;
+  --ambient-1: rgba(255, 142, 91, 0.25);
+  --ambient-2: rgba(165, 112, 214, 0.22);
+  --celestial: #ffb16b;
+  --celestial-glow: rgba(255, 177, 107, 0.41);
+  --star-opacity: 0.25;
+  --cloud-opacity: 0.48;
+}
+
+body.phase-isha {
+  --bg-top: #091b3c;
+  --bg-bottom: #1b4068;
+  --ambient-1: rgba(138, 171, 255, 0.22);
+  --ambient-2: rgba(111, 209, 255, 0.12);
+  --celestial: #f1f6ff;
+  --celestial-glow: rgba(201, 226, 255, 0.45);
+  --star-opacity: 1;
+  --cloud-opacity: 0.25;
+}
+
+.sky {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.glow {
+  position: absolute;
+  width: clamp(12rem, 35vw, 24rem);
+  aspect-ratio: 1;
+  top: 7%;
+  left: 6%;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--celestial-glow), transparent 70%);
+  animation: drift 18s ease-in-out infinite alternate;
+}
+
+.sun-moon {
+  position: absolute;
+  width: clamp(3.6rem, 8vw, 5.6rem);
+  aspect-ratio: 1;
+  top: clamp(1.7rem, 6vh, 4.2rem);
+  left: clamp(1.4rem, 7vw, 5.5rem);
+  border-radius: 50%;
+  background: var(--celestial);
+  box-shadow:
+    0 0 0.9rem var(--celestial-glow),
+    0 0 2rem var(--celestial-glow);
+  animation: drift 18s ease-in-out infinite alternate;
+  transition: background 450ms ease, box-shadow 450ms ease, opacity 450ms ease;
+}
+
+body.phase-isha .sun-moon::after {
+  content: "";
+  position: absolute;
+  width: 78%;
+  aspect-ratio: 1;
+  top: 6%;
+  right: -6%;
+  border-radius: 50%;
+  background: #9fc4ff;
+  opacity: 0.7;
+}
+
+.cloud {
+  position: absolute;
+  height: clamp(1.6rem, 4.6vw, 3rem);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.46);
+  filter: blur(0.6px);
+  opacity: var(--cloud-opacity);
+  transition: opacity 420ms ease;
+}
+
+.cloud::before,
+.cloud::after {
+  content: "";
+  position: absolute;
+  border-radius: 999px;
+  background: inherit;
+}
+
+.cloud::before {
+  width: 38%;
+  height: 115%;
+  left: 13%;
+  top: -45%;
+}
+
+.cloud::after {
+  width: 30%;
+  height: 95%;
+  right: 16%;
+  top: -35%;
+}
+
+.cloud-1 {
+  width: clamp(5rem, 18vw, 10rem);
+  top: 17%;
+  left: -18%;
+  animation: cloud-float-1 40s linear infinite;
+}
+
+.cloud-2 {
+  width: clamp(4.2rem, 14vw, 8rem);
+  top: 24%;
+  left: -12%;
+  animation: cloud-float-2 53s linear infinite;
+}
+
+.star {
+  position: absolute;
+  width: 0.22rem;
+  height: 0.22rem;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 0.6rem rgba(255, 255, 255, 0.86);
+  opacity: var(--star-opacity);
+  transition: opacity 420ms ease;
+  animation: twinkle 3.8s ease-in-out infinite;
+}
+
+.star-1 {
+  top: 14%;
+  left: 68%;
+  animation-delay: 0.2s;
+}
+
+.star-2 {
+  top: 9%;
+  left: 76%;
+  animation-delay: 1s;
+}
+
+.star-3 {
+  top: 18%;
+  left: 84%;
+  animation-delay: 1.8s;
+}
+
+.star-4 {
+  top: 24%;
+  left: 72%;
+  animation-delay: 2.6s;
+}
+
+.star-5 {
+  top: 7%;
+  left: 88%;
+  animation-delay: 3.1s;
+}
+
+.app {
+  width: min(980px, 94vw);
+  margin: 1.5rem auto;
+  display: grid;
+  gap: clamp(0.75rem, 2.6vw, 1rem);
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  position: relative;
+  z-index: 1;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: clamp(0.9rem, 2vw, 1.2rem);
+  box-shadow: 0 14px 36px var(--card-shadow);
+  backdrop-filter: blur(6px);
+  padding: clamp(0.85rem, 2.8vw, 1.2rem);
+  animation: rise 650ms ease both;
+}
+
+.hero {
+  grid-column: span 12;
+  text-align: center;
+  position: relative;
+  padding-top: 2.4rem;
+}
+
+.language-toggle,
+.theme-toggle {
+  position: absolute;
+  top: 0.8rem;
+  border: 1px solid var(--toggle-border);
+  border-radius: 999px;
+  background: var(--toggle-bg);
+  color: var(--toggle-text);
+  font-weight: 700;
+  font-size: 0.72rem;
+  line-height: 1;
+  padding: 0.35rem 0.58rem;
+  cursor: pointer;
+  backdrop-filter: blur(3px);
+}
+
+.language-toggle {
+  inset-inline-end: 0.8rem;
+}
+
+.theme-toggle {
+  inset-inline-start: 0.8rem;
+}
+
+.language-toggle:hover,
+.theme-toggle:hover {
+  background: var(--toggle-bg-hover);
+}
+
+.kicker {
+  margin: 0;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 800;
+  color: var(--accent-dark);
+  font-size: 0.74rem;
+}
+
+h1 {
+  margin: 0.4rem 0 0.25rem;
+  font-size: clamp(1.4rem, 2vw + 1rem, 2.45rem);
+}
+
+.location,
+.meta {
+  margin: 0;
+  color: var(--muted);
+  overflow-wrap: anywhere;
+}
+
+.countdown-wrap {
+  margin-top: 1rem;
+  padding: 1rem;
+  border-radius: 1rem;
+  background: linear-gradient(130deg, var(--countdown-bg-1), var(--countdown-bg-2));
+  border: 1px solid var(--ring);
+}
+
+.label {
+  margin: 0;
+  color: var(--muted);
+}
+
+.next-prayer {
+  margin: 0.3rem 0 0;
+  font-family: inherit;
+  font-size: clamp(1.6rem, 2.2vw + 1rem, 2.55rem);
+}
+
+.countdown {
+  margin: 0.1rem 0 0;
+  font-size: clamp(1.5rem, 2.5vw + 1rem, 2.9rem);
+  font-weight: 800;
+  color: var(--accent-dark);
+  text-shadow: 0 0 16px rgba(15, 143, 116, 0.2);
+  font-variant-numeric: tabular-nums;
+}
+
+.prayer-scene {
+  --scene-top: #7aa5d6;
+  --scene-bottom: #f4d79f;
+  --orb-color: #ffd56f;
+  --orb-glow: rgba(255, 213, 111, 0.48);
+  --orb-size: clamp(1.9rem, 4vw, 2.8rem);
+  --orb-left: 12%;
+  --orb-top: 22%;
+  --star-opacity: 0;
+  --cloud-opacity: 0.8;
+  --ground-top: #27505c;
+  --ground-bottom: #17333d;
+  --mosque: #1d4350;
+  --scene-gif: none;
+  position: relative;
+  margin-top: 0.95rem;
+  height: clamp(7.6rem, 24vw, 10.2rem);
+  border-radius: 0.95rem;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.36);
+  background: linear-gradient(180deg, var(--scene-top), var(--scene-bottom));
+}
+
+/* GIF overlay behind all scene elements */
+.prayer-scene::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: var(--scene-gif) center / cover no-repeat;
+  opacity: 0.62;
+  filter: saturate(1.1) contrast(1.04) brightness(0.96);
+  border-radius: inherit;
+}
+
+.scene-aura {
+  position: absolute;
+  z-index: 1;
+  width: 42%;
+  aspect-ratio: 1;
+  top: -22%;
+  left: -8%;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--orb-glow), transparent 70%);
+  animation: aura-float 9s ease-in-out infinite alternate;
+}
+
+.scene-orb {
+  position: absolute;
+  z-index: 1;
+  width: var(--orb-size);
+  aspect-ratio: 1;
+  top: var(--orb-top);
+  left: var(--orb-left);
+  border-radius: 50%;
+  background: var(--orb-color);
+  box-shadow: 0 0 1rem var(--orb-glow), 0 0 2.2rem var(--orb-glow);
+  animation: orb-drift 12s ease-in-out infinite alternate;
+}
+
+.scene-star {
+  position: absolute;
+  z-index: 1;
+  width: 0.26rem;
+  height: 0.26rem;
+  border-radius: 50%;
+  background: #fff;
+  opacity: var(--star-opacity);
+  box-shadow: 0 0 0.45rem rgba(255, 255, 255, 0.9);
+  animation: twinkle 3.6s ease-in-out infinite;
+}
+
+.scene-star.s1 {
+  top: 14%;
+  left: 62%;
+}
+
+.scene-star.s2 {
+  top: 23%;
+  left: 77%;
+  animation-delay: 0.8s;
+}
+
+.scene-star.s3 {
+  top: 11%;
+  left: 88%;
+  animation-delay: 1.6s;
+}
+
+.scene-cloud {
+  position: absolute;
+  z-index: 1;
+  height: clamp(1rem, 2.2vw, 1.45rem);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.55);
+  opacity: var(--cloud-opacity);
+  filter: blur(0.4px);
+}
+
+.scene-cloud::before,
+.scene-cloud::after {
+  content: "";
+  position: absolute;
+  border-radius: 999px;
+  background: inherit;
+}
+
+.scene-cloud::before {
+  width: 43%;
+  height: 120%;
+  left: 12%;
+  top: -46%;
+}
+
+.scene-cloud::after {
+  width: 32%;
+  height: 95%;
+  right: 14%;
+  top: -34%;
+}
+
+.scene-cloud.c1 {
+  width: clamp(3.6rem, 10vw, 5.4rem);
+  top: 18%;
+  left: -18%;
+  animation: scene-cloud-move 25s linear infinite;
+}
+
+.scene-cloud.c2 {
+  width: clamp(3rem, 8vw, 4.4rem);
+  top: 30%;
+  left: -8%;
+  animation: scene-cloud-move 34s linear infinite;
+  animation-delay: -7s;
+}
+
+.scene-ground {
+  position: absolute;
+  z-index: 1;
+  inset: auto 0 0;
+  height: 38%;
+  background: linear-gradient(180deg, var(--ground-top), var(--ground-bottom));
+}
+
+.scene-mosque {
+  position: absolute;
+  z-index: 2;
+  right: 9%;
+  bottom: 16%;
+  width: clamp(4.6rem, 16vw, 7.8rem);
+  height: clamp(2.6rem, 8vw, 4.2rem);
+}
+
+.scene-mosque .minaret {
+  position: absolute;
+  left: 2%;
+  bottom: 0;
+  width: 16%;
+  height: 92%;
+  border-radius: 6px 6px 0 0;
+  background: var(--mosque);
+}
+
+.scene-mosque .minaret::after {
+  content: "";
+  position: absolute;
+  width: 52%;
+  aspect-ratio: 1;
+  left: 24%;
+  top: -14%;
+  border-radius: 50%;
+  background: var(--mosque);
+}
+
+.scene-mosque .dome {
+  position: absolute;
+  bottom: 0;
+  background: var(--mosque);
+  border-radius: 999px 999px 0 0;
+}
+
+.scene-mosque .dome.big {
+  left: 25%;
+  width: 42%;
+  height: 64%;
+}
+
+.scene-mosque .dome.small {
+  right: 2%;
+  width: 28%;
+  height: 46%;
+}
+
+.prayer-scene.scene-fajr {
+  --scene-top: #89a9d8;
+  --scene-bottom: #ffd29a;
+  --orb-color: #ffd27a;
+  --orb-glow: rgba(255, 205, 117, 0.5);
+  --orb-left: 13%;
+  --orb-top: 28%;
+  --star-opacity: 0.45;
+  --cloud-opacity: 0.72;
+  --scene-gif: url("assets/fajr.gif");
+}
+
+.prayer-scene.scene-sunrise {
+  --scene-top: #73bfff;
+  --scene-bottom: #ffe0a6;
+  --orb-color: #ffca74;
+  --orb-glow: rgba(255, 202, 116, 0.45);
+  --orb-left: 24%;
+  --orb-top: 22%;
+  --star-opacity: 0.12;
+  --cloud-opacity: 0.76;
+  --scene-gif: url("assets/sunrise.gif");
+}
+
+.prayer-scene.scene-dhuhr {
+  --scene-top: #6ec2ff;
+  --scene-bottom: #ffe79c;
+  --orb-color: #ffe16d;
+  --orb-glow: rgba(255, 225, 109, 0.52);
+  --orb-left: 46%;
+  --orb-top: 10%;
+  --orb-size: clamp(2.2rem, 4.8vw, 3rem);
+  --star-opacity: 0;
+  --cloud-opacity: 0.82;
+  --scene-gif: url("assets/zohar.gif");
+}
+
+.prayer-scene.scene-asr {
+  --scene-top: #77b0df;
+  --scene-bottom: #ffc480;
+  --orb-color: #ffc96c;
+  --orb-glow: rgba(255, 201, 108, 0.44);
+  --orb-left: 58%;
+  --orb-top: 20%;
+  --star-opacity: 0;
+  --cloud-opacity: 0.65;
+  --scene-gif: url("assets/aasar.gif");
+}
+
+.prayer-scene.scene-maghrib {
+  --scene-top: #794f91;
+  --scene-bottom: #ff8f5d;
+  --orb-color: #ffae63;
+  --orb-glow: rgba(255, 151, 88, 0.45);
+  --orb-left: 76%;
+  --orb-top: 33%;
+  --star-opacity: 0.2;
+  --cloud-opacity: 0.45;
+  --scene-gif: url("assets/magrib.gif");
+}
+
+.prayer-scene.scene-isha {
+  --scene-top: #0f2c57;
+  --scene-bottom: #1c4268;
+  --orb-color: #f2f5ff;
+  --orb-glow: rgba(204, 225, 255, 0.48);
+  --orb-left: 24%;
+  --orb-top: 17%;
+  --star-opacity: 1;
+  --cloud-opacity: 0.22;
+  --ground-top: #1a3642;
+  --ground-bottom: #0f2129;
+  --mosque: #cdd8e6;
+  --scene-gif: url("assets/isha.gif");
+}
+
+.times {
+  grid-column: span 12;
+}
+
+h2 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+}
+
+.prayer-list {
+  list-style: none;
+  margin: 0.3rem 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.38rem;
+}
+
+.prayer-list li {
+  --row-gif: none;
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.95rem 1.1rem;
+  min-height: 4.2rem;
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.18);
+  transition: transform 160ms ease, box-shadow 160ms ease;
+}
+
+.prayer-list li:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.26);
+}
+
+/* Layer 1 (z-index 0): GIF fills the row */
+.prayer-list li::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: var(--row-gif) center / cover no-repeat;
+  opacity: 0.52;
+  transition: opacity 300ms ease;
+}
+
+/* Layer 2 (z-index 1): smooth vignette scrim for text readability */
+.prayer-list li::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    105deg,
+    rgba(0, 0, 0, 0.45) 0%,
+    rgba(0, 0, 0, 0.22) 50%,
+    rgba(0, 0, 0, 0.08) 100%
+  );
+}
+
+/* ── per-prayer row backgrounds (3-stop smooth gradients) ── */
+.prayer-row-fajr {
+  background: linear-gradient(
+    135deg,
+    #0e1a45 0%,
+    #3a2568 55%,
+    #7b4f9e 100%
+  );
+  --row-gif: url("assets/fajr.gif");
+}
+
+.prayer-row-sunrise {
+  background: linear-gradient(
+    135deg,
+    #7c2d00 0%,
+    #c85e12 50%,
+    #f5a020 100%
+  );
+  --row-gif: url("assets/sunrise.gif");
+}
+
+.prayer-row-dhuhr {
+  background: linear-gradient(
+    135deg,
+    #0a4a8c 0%,
+    #1a80c8 50%,
+    #4dc8f5 100%
+  );
+  --row-gif: url("assets/zohar.gif");
+}
+
+.prayer-row-asr {
+  background: linear-gradient(
+    135deg,
+    #0f3d7a 0%,
+    #1e6ba8 40%,
+    #c86818 100%
+  );
+  --row-gif: url("assets/aasar.gif");
+}
+
+.prayer-row-maghrib {
+  background: linear-gradient(
+    135deg,
+    #3a0a30 0%,
+    #7c1f50 45%,
+    #d43010 100%
+  );
+  --row-gif: url("assets/magrib.gif");
+}
+
+.prayer-row-isha {
+  background: linear-gradient(
+    135deg,
+    #020710 0%,
+    #071530 50%,
+    #0f2850 100%
+  );
+  --row-gif: url("assets/isha.gif");
+}
+
+.prayer-list li.active {
+  border-color: rgba(244, 158, 76, 0.85);
+  box-shadow: 0 0 0 2px rgba(244, 158, 76, 0.28), 0 6px 24px rgba(0, 0, 0, 0.28);
+}
+
+/* Active: GIF more vivid, scrim lighter */
+.prayer-list li.active::before {
+  opacity: 0.82;
+}
+
+.prayer-list li.active::after {
+  background: linear-gradient(
+    105deg,
+    rgba(0, 0, 0, 0.32) 0%,
+    rgba(0, 0, 0, 0.12) 55%,
+    rgba(0, 0, 0, 0.04) 100%
+  );
+}
+
+.prayer-cell-main {
+  position: relative;
+  z-index: 2;
+  min-width: 0;
+}
+
+.prayer-list strong {
+  position: relative;
+  z-index: 2;
+  min-width: 0;
+  font-size: 1rem;
+  font-variant-numeric: tabular-nums;
+  justify-self: end;
+  color: #f6fbff;
+  text-shadow: 0 1px 4px rgba(2, 13, 25, 0.8);
+  white-space: nowrap;
+}
+
+.prayer-cell-name {
+  color: #f6fbff;
+  font-weight: 700;
+  font-size: 1.05rem;
+  line-height: 1.2;
+  text-shadow: 0 1px 4px rgba(2, 13, 25, 0.8);
+}
+
+html[dir="rtl"] .kicker {
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+html[dir="rtl"] .prayer-list li {
+  grid-template-columns: 3.3rem minmax(0, 1fr);
+}
+
+html[dir="rtl"] .prayer-list strong {
+  justify-self: start;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes aura-float {
+  from {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  to {
+    transform: translate3d(14px, -8px, 0) scale(1.06);
+  }
+}
+
+@keyframes orb-drift {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(10px, -6px, 0);
+  }
+}
+
+@keyframes scene-cloud-move {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(125vw);
+  }
+}
+
+@keyframes drift {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(12px, -8px, 0);
+  }
+}
+
+@keyframes twinkle {
+  0%,
+  100% {
+    transform: scale(0.7);
+    filter: brightness(0.8);
+  }
+  50% {
+    transform: scale(1.2);
+    filter: brightness(1.22);
+  }
+}
+
+@keyframes cloud-float-1 {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(130vw);
+  }
+}
+
+@keyframes cloud-float-2 {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(140vw);
+  }
+}
+
+@media (max-width: 850px) {
+  .times {
+    grid-column: span 12;
+  }
+
+  .app {
+    margin: 0.85rem auto 1.15rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .kicker {
+    letter-spacing: 0.09em;
+  }
+
+  h1 {
+    line-height: 1.15;
+  }
+
+  .countdown-wrap {
+    padding: 0.85rem;
+  }
+
+  .prayer-scene {
+    height: 7.1rem;
+  }
+
+  .scene-mosque {
+    right: 6%;
+    width: 4.9rem;
+  }
+
+  .countdown {
+    font-size: clamp(1.35rem, 10vw, 2.1rem);
+  }
+
+  .next-prayer {
+    font-size: clamp(1.4rem, 8vw, 1.95rem);
+  }
+
+  .prayer-list li {
+    grid-template-columns: minmax(0, 1fr) auto;
+    padding: 0.75rem 0.85rem;
+    min-height: 3.6rem;
+  }
+
+  .prayer-cell-name {
+    font-size: 0.92rem;
+  }
+
+  .sun-moon {
+    top: 1.2rem;
+    left: 1rem;
+  }
+
+  .star-5 {
+    left: 82%;
+  }
+
+  html[dir="rtl"] .prayer-list li {
+    grid-template-columns: 2.95rem minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 420px) {
+  .prayer-list {
+    grid-template-columns: 1fr;
+  }
+
+  .label,
+  .meta {
+    font-size: 0.86rem;
+  }
+
+  .prayer-list strong {
+    font-size: 0.88rem;
+  }
+
+  .prayer-scene {
+    margin-top: 0.75rem;
+    height: 6.6rem;
+  }
+
+  .scene-cloud.c1 {
+    top: 16%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sky *,
+  .prayer-scene *,
+  .prayer-list li::before,
+  .card {
+    animation: none !important;
+    transition: none !important;
+  }
+}

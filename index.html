@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Prayer Countdown</title>
+    <meta
+      name="description"
+      content="Prayer time countdown to the next prayer, ready for GitHub Pages."
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="sky" aria-hidden="true">
+      <div class="glow"></div>
+      <div class="sun-moon"></div>
+      <div class="cloud cloud-1"></div>
+      <div class="cloud cloud-2"></div>
+      <span class="star star-1"></span>
+      <span class="star star-2"></span>
+      <span class="star star-3"></span>
+      <span class="star star-4"></span>
+      <span class="star star-5"></span>
+    </div>
+    <main class="app">
+      <section class="hero card">
+        <button id="themeToggle" class="theme-toggle" type="button">Theme: Light</button>
+        <button id="languageToggle" class="language-toggle" type="button">AR</button>
+        <p id="kickerText" class="kicker">Daily Salah Tracker</p>
+        <h1 id="heroTitle">Countdown To Next Prayer</h1>
+        <p id="locationLabel" class="location">Loading your location...</p>
+        <div class="countdown-wrap">
+          <p id="nextPrayerLabel" class="label">Next prayer</p>
+          <p id="nextPrayer" class="next-prayer">--</p>
+          <p id="countdown" class="countdown">--:--:--</p>
+        </div>
+        <div id="prayerScene" class="prayer-scene scene-fajr" aria-hidden="true">
+          <div class="scene-aura"></div>
+          <div class="scene-orb"></div>
+          <span class="scene-star s1"></span>
+          <span class="scene-star s2"></span>
+          <span class="scene-star s3"></span>
+          <div class="scene-cloud c1"></div>
+          <div class="scene-cloud c2"></div>
+          <div class="scene-ground"></div>
+          <div class="scene-mosque">
+            <span class="minaret"></span>
+            <span class="dome big"></span>
+            <span class="dome small"></span>
+          </div>
+        </div>
+        <p id="meta" class="meta">Fetching timings...</p>
+      </section>
+
+      <section class="times card">
+        <h2 id="timesTitle">Today's Prayer Times</h2>
+        <ul id="prayerList" class="prayer-list">
+          <li class="prayer-row prayer-row-fajr">
+            <span class="prayer-cell-main">
+              <span class="prayer-cell-name">Fajar</span>
+            </span>
+            <strong>--:--</strong>
+          </li>
+          <li class="prayer-row prayer-row-sunrise">
+            <span class="prayer-cell-main">
+              <span class="prayer-cell-name">Sunrise</span>
+            </span>
+            <strong>--:--</strong>
+          </li>
+          <li class="prayer-row prayer-row-dhuhr">
+            <span class="prayer-cell-main">
+              <span class="prayer-cell-name">Zohar</span>
+            </span>
+            <strong>--:--</strong>
+          </li>
+          <li class="prayer-row prayer-row-asr">
+            <span class="prayer-cell-main">
+              <span class="prayer-cell-name">Aasar</span>
+            </span>
+            <strong>--:--</strong>
+          </li>
+          <li class="prayer-row prayer-row-maghrib">
+            <span class="prayer-cell-main">
+              <span class="prayer-cell-name">Magrib</span>
+            </span>
+            <strong>--:--</strong>
+          </li>
+          <li class="prayer-row prayer-row-isha">
+            <span class="prayer-cell-main">
+              <span class="prayer-cell-name">Isha</span>
+            </span>
+            <strong>--:--</strong>
+          </li>
+        </ul>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
