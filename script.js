@@ -23,6 +23,7 @@ const I18N = {
     todayPrayerTimes: "Today's Prayer Times",
     fetchingTimings: "Fetching timings...",
     requestingGeolocation: "Requesting geolocation permission...",
+    detectingByIP: "Detecting location by network...",
     geolocationUnavailableFallback: (city, country) => `Geolocation unavailable. Loading ${city}, ${country}...`,
     locationBlockedFallback: (city, country) => `Location blocked. Loading ${city}, ${country}...`,
     methodLabel: "Method",
@@ -58,6 +59,7 @@ const I18N = {
     todayPrayerTimes: "مواقيت الصلاة اليوم",
     fetchingTimings: "جاري تحميل المواقيت...",
     requestingGeolocation: "جاري طلب إذن الموقع...",
+    detectingByIP: "جاري تحديد الموقع عبر الشبكة...",
     geolocationUnavailableFallback: (city, country) => `الموقع غير متاح. جارٍ تحميل ${city}، ${country}...`,
     locationBlockedFallback: (city, country) => `تم رفض إذن الموقع. جارٍ تحميل ${city}، ${country}...`,
     methodLabel: "طريقة الحساب",
@@ -399,6 +401,14 @@ function getCurrentPosition(options) {
   });
 }
 
+async function fetchLocationByIP() {
+  const response = await fetch("https://ipapi.co/json/");
+  if (!response.ok) throw new Error("IP geolocation failed");
+  const data = await response.json();
+  if (!data.latitude || !data.longitude) throw new Error("IP geolocation returned no coordinates");
+  return { lat: data.latitude, lng: data.longitude, city: data.city, country: data.country_name };
+}
+
 async function fetchJson(url, errorMessage) {
   const response = await fetch(url);
   if (!response.ok) {
@@ -477,25 +487,41 @@ async function fetchByCity(city, country) {
   updateUiAfterFetch();
 }
 
+async function loadViaIPFallback() {
+  ui.meta.textContent = t("detectingByIP");
+  const ipLoc = await fetchLocationByIP();
+  await fetchByCoordinates(ipLoc.lat, ipLoc.lng);
+}
+
+async function loadHardcodedFallback() {
+  await fetchByCity(DEFAULT_FALLBACK_CITY, DEFAULT_FALLBACK_COUNTRY).catch((err) => {
+    ui.meta.textContent = err.message;
+  });
+}
+
 async function loadAutomaticLocation() {
   if (!navigator.geolocation) {
-    ui.meta.textContent = t("geolocationUnavailableFallback")(DEFAULT_FALLBACK_CITY, DEFAULT_FALLBACK_COUNTRY);
-    await fetchByCity(DEFAULT_FALLBACK_CITY, DEFAULT_FALLBACK_COUNTRY).catch((err) => {
-      ui.meta.textContent = err.message;
-    });
+    try {
+      await loadViaIPFallback();
+    } catch {
+      ui.meta.textContent = t("geolocationUnavailableFallback")(DEFAULT_FALLBACK_CITY, DEFAULT_FALLBACK_COUNTRY);
+      await loadHardcodedFallback();
+    }
     return;
   }
 
   ui.meta.textContent = t("requestingGeolocation");
 
   try {
-    const position = await getCurrentPosition({ enableHighAccuracy: true, timeout: 12000 });
+    const position = await getCurrentPosition({ enableHighAccuracy: true, timeout: 10000 });
     await fetchByCoordinates(position.coords.latitude, position.coords.longitude);
   } catch {
-    ui.meta.textContent = t("locationBlockedFallback")(DEFAULT_FALLBACK_CITY, DEFAULT_FALLBACK_COUNTRY);
-    await fetchByCity(DEFAULT_FALLBACK_CITY, DEFAULT_FALLBACK_COUNTRY).catch((err) => {
-      ui.meta.textContent = err.message;
-    });
+    try {
+      await loadViaIPFallback();
+    } catch {
+      ui.meta.textContent = t("locationBlockedFallback")(DEFAULT_FALLBACK_CITY, DEFAULT_FALLBACK_COUNTRY);
+      await loadHardcodedFallback();
+    }
   }
 }
 
